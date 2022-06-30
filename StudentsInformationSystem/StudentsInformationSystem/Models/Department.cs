@@ -13,8 +13,7 @@ namespace StudentsInformationSystem.Models
         public string Name { get; set; }
         public List<Student> Students { get; set; }
         public List<Lecture> Lectures { get; set; }
-        //[ForeignKey("Student")]
-        //public Student StudentId { get; set; }
+        
         public Department() { }
         public Department(string name) 
         { 
