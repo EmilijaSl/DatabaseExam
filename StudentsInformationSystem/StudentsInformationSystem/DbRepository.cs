@@ -61,17 +61,48 @@ namespace StudentsInformationSystem
             }
             return lectur;
         }
+        public List<Student> GetAllStudentsOrdered()
+        { 
+        var student = _dbContext.Students.OrderBy(x=>x.Id).ToList();
+            foreach (var stud in student)
+            {
+                Console.WriteLine($"\n{stud.Id}, {stud.Name}, {stud.LastName}, Katedros Id - {stud.DepartmentId}");
+            }
+            return student;
+        }
         public List<Student> GetAllSameDepartmentStudents(int departmentId)
         { 
         return _dbContext.Students.OrderBy(x=>x.Id).ToList().Where(y=>y.DepartmentId== departmentId).ToList();  
         }
-        public Department GetDepartment(int id)
+        public Department GetDepartmentWithLectures(int id)
         {
             return _dbContext.Departments.Include(x => x.Lectures).FirstOrDefault(y => y.Id == id);
+        }
+        public Department GetDepartmentWithStudents(int id)
+        {
+            return _dbContext.Departments.Include(x => x.Students).FirstOrDefault(y => y.Id == id);
+            
+        }
+        public Student GetStudentWithDepartment(int id)
+        {
+            return _dbContext.Students.Include(x => x.Department).FirstOrDefault(y => y.DepartmentId == id);
+          
+        }
+        public Lecture GetLectureWithStudents(int id)
+        { 
+        return _dbContext.Lectures.Include(x=>x.Students).FirstOrDefault(y => y.Id == id);
         }
         public void UpdateDepartment(Department department)
         { 
         _dbContext.Attach(department);
+        }
+        public void UpdateLecture(Lecture lecture)
+        { 
+        _dbContext.Attach(lecture);
+        }
+        public void UpdateStudent(Student student)
+        {
+            _dbContext.Attach(student);
         }
 
     }
