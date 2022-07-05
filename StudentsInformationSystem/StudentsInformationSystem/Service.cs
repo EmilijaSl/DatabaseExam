@@ -56,6 +56,16 @@ namespace StudentsInformationSystem
             _repository.UpdateDepartment(departament);
             _repository.SaveChanges();
         }
+        public void AssignLectureToStudent(int studId, int lectId)
+        {
+            var student = _repository.GetStudentWithLectures(studId);
+            var newAssign = _repository.GetLectureById(lectId);
+            student.Lectures.Add(newAssign);
+            _repository.UpdateStudent(student);
+            _repository.SaveChanges();
+
+
+        }
         public void AssignStudentToDepartment(int depId, int studentId)
         {
             var department = _repository.GetDepartmentWithLectures(depId);
@@ -98,6 +108,29 @@ namespace StudentsInformationSystem
             var newDepartment = _repository.GetDepartmentById(departmentId);
             newStudent.Department = newDepartment;
             _repository.SaveChanges();
+        }
+        public void LecturesFromSameDepartment(int depId)
+        {
+            Department department = _repository.GetDepartmentById(depId);
+
+            foreach (var lecture in _repository.RetrieveLectures())
+            {
+                if (lecture.Departments.Contains(department))
+                {
+                    Console.WriteLine($"{lecture.Id}, {lecture.Name}");
+                }
+            }
+        }
+        public void LecturesFromSameStudent(int studId)
+        {
+            Student student = _repository.GetStudentsById(studId);
+            foreach (var lecture in _repository.RetrieveLectures())
+            {
+                if (lecture.Students.Contains(student))
+                {
+                    Console.WriteLine($"{lecture.Id}, {lecture.Name}");
+                }
+            }
         }
        
 

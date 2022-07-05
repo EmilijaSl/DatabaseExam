@@ -78,32 +78,36 @@ namespace StudentsInformationSystem
         {
             return _dbContext.Departments.Include(x => x.Lectures).FirstOrDefault(y => y.Id == id);
         }
-        public Department GetDepartmentWithStudents(int id)
-        {
-            return _dbContext.Departments.Include(x => x.Students).FirstOrDefault(y => y.Id == id);
-            
-        }
-        public Student GetStudentWithDepartment(int id)
-        {
-            return _dbContext.Students.Include(x => x.Department).FirstOrDefault(y => y.DepartmentId == id);
-          
-        }
-        public Lecture GetLectureWithStudents(int id)
+        public Student GetStudentWithLectures(int id)
         { 
-        return _dbContext.Lectures.Include(x=>x.Students).FirstOrDefault(y => y.Id == id);
+        return _dbContext.Students.Include(x => x.Lectures).FirstOrDefault(y => y.Id == id);
         }
         public void UpdateDepartment(Department department)
         { 
         _dbContext.Attach(department);
         }
-        public void UpdateLecture(Lecture lecture)
-        { 
-        _dbContext.Attach(lecture);
-        }
         public void UpdateStudent(Student student)
-        {
-            _dbContext.Attach(student);
+        { 
+        _dbContext.Attach(student);
         }
+        public void LecturesFromSameDepartment(int id)
+        {
+         
+        }
+        public List<Department> RetrieveDepartments()
+        {
+            return _dbContext.Departments.Include(x => x.Lectures).Include(x => x.Students).ToList();
+        }
+        public List<Lecture> RetrieveLectures()
+        {
+            return _dbContext.Lectures.Include(x => x.Departments).Include(x => x.Students).ToList();
+        }
+        public List<Student> RetrieveStudents()
+        {
+            return _dbContext.Students.Include(x => x.Lectures).ToList();
+        }
+
+
 
     }
 }
