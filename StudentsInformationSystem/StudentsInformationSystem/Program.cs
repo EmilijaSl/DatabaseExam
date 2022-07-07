@@ -65,7 +65,6 @@ ProgramIndeed();
 
 void CreateDepartment()
 {
-    
         Console.WriteLine("Iveskite norimo sukurti Departamento pavadinima");
         var name = Console.ReadLine();
         service.CreateDepartment(name);
@@ -126,20 +125,19 @@ void Task1CreateDepartmentWithAssignments()
         Console.Clear();
         Console.WriteLine("Iveskite paskaitos, kuria norite priskirti id");
         service.GetLectures();
-        var lectId = int.Parse(Console.ReadLine());
+        var lecId = int.Parse(Console.ReadLine());
         Console.Clear();
         Console.WriteLine("Iveskite studento, kuri norite priskirti id");
         service.GetStudents();
-        var studentId = int.Parse(Console.ReadLine());
+        var stuId = int.Parse(Console.ReadLine());
         Console.Clear();
-        service.CreateDepartmentWithStudentsAndLectures(name, lectId, studentId);
+        service.CreateDepartmentWithStudentsAndLectures(name, lecId, stuId);
         Console.WriteLine("Katedra sukurta, jeigu norite baigti spauskite 0, jeigu norite testi - spauskite enter");
         if (Console.ReadLine() == "0")
         {
             repeat = false;
         }
     }
-
 }
 void Task2AssignLectureToDepartment()
 {
@@ -152,9 +150,9 @@ void Task2AssignLectureToDepartment()
         Console.Clear();
         Console.WriteLine("Iveskite paskaitos, kuria norite priskirti id\n");
         service.GetLectures();
-        var lectId = int.Parse(Console.ReadLine());
+        var lecId = int.Parse(Console.ReadLine());
         Console.Clear();
-        service.AssignLectureToDepartment(depId, lectId);
+        service.AssignLectureToDepartment(depId, lecId);
         Console.WriteLine("Paskaita priskirta, jeigu norite baigti spauskite 0, jeigu norite testi - spauskite enter");
         if (Console.ReadLine() == "0")
         {
@@ -173,9 +171,9 @@ void Task2AsssignStudentToDepartment()
         Console.Clear();
         Console.WriteLine("Iveskite studento, kuri norite priskirti id");
         service.GetStudents();
-        var studId = int.Parse(Console.ReadLine());
+        var stuId = int.Parse(Console.ReadLine());
         Console.Clear();
-        service.AssignStudentToDepartment(depId, studId);
+        service.AssignStudentToDepartment(depId, stuId);
         Console.WriteLine("Studentas pridetas, jeigu norite baigti spauskite 0, jeigu norite testi - spauskite enter");
         if (Console.ReadLine() == "0")
         {
@@ -216,13 +214,13 @@ void Task4CreateStudentAddLecturesAndDepartment()
         Console.Clear();
         Console.WriteLine("Iveskite naujo studento Katedros id");
         service.GetDepartments();
-        var departmentId = int.Parse(Console.ReadLine());
+        var depId = int.Parse(Console.ReadLine());
         Console.Clear();
         Console.WriteLine("Iveskite paskaitos, kuria norite priskirti id");
         service.GetLectures();
-        var lectId = int.Parse(Console.ReadLine());
+        var lecId = int.Parse(Console.ReadLine());
         Console.Clear();
-        service.CreateStudentAddLecturesAndDepartment(name, lastName, departmentId, lectId);
+        service.CreateStudentAddLecturesAndDepartment(name, lastName, depId, lecId);
         Console.WriteLine("Studentas sukurtas, informacija prideta, jeigu norite baigti spauskite 0, jeigu norite testi - spauskite enter");
         if (Console.ReadLine() == "0")
         {
@@ -237,13 +235,13 @@ void Task5MoveStudent()
     {
         Console.WriteLine("Iveskite studento, kurio Katedra norite keisti id");
         service.GetStudents();
-        var studId = int.Parse(Console.ReadLine());
+        var stuId = int.Parse(Console.ReadLine());
         Console.Clear();
         Console.WriteLine("Iveskite Katedros, kuria norite priskirti id");
         service.GetDepartments();
         var depId = int.Parse(Console.ReadLine());
         Console.Clear();
-        service.MoveStudent(studId, depId);
+        service.MoveStudent(stuId, depId);
         Console.WriteLine("Informacija atnaujinta, jeigu norite baigti spauskite 0, jeigu norite testi - spauskite enter");
         if (Console.ReadLine() == "0")
         {

@@ -70,9 +70,9 @@ namespace StudentsInformationSystem
             }
             return student;
         }
-        public List<Student> GetAllSameDepartmentStudents(int departmentId)
+        public List<Student> GetAllSameDepartmentStudents(int depId)
         { 
-        return _dbContext.Students.OrderBy(x=>x.Id).ToList().Where(y=>y.DepartmentId== departmentId).ToList();  
+        return _dbContext.Students.OrderBy(x=>x.Id).ToList().Where(y=>y.DepartmentId== depId).ToList();  
         }
         public Department GetDepartmentWithLectures(int id)
         {
